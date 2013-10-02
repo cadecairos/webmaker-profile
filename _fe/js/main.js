@@ -3,6 +3,7 @@ requirejs.config({
   paths: {
     bleach: 'bleach/lib/bleach',
     config: '../_fe/js/config',
+    csrf: '../_fe/js/csrf',
     getUserMedia: 'getUserMedia/getusermedia.bundle',
     gifJS: 'gif-js/dist/gif',
     imagesloaded: 'imagesloaded/imagesloaded',

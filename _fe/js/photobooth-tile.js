@@ -4,6 +4,7 @@ define([
   'gifJS',
   'getUserMedia',
   'js/localstrings',
+  'csrf',
   'config'
 ], function (
   $,
@@ -11,6 +12,7 @@ define([
   Gif,
   getUserMedia,
   strings,
+  csrf,
   config
 ) {
 
@@ -145,6 +147,9 @@ define([
       contentType: 'application/json',
       xhrFields: {
         withCredentials: true
+      },
+      headers: {
+        'x-csrf-token': csrf.get()
       },
       data: JSON.stringify({
         image: base64

@@ -4,8 +4,9 @@
 
 define([
   'jquery',
+  'csrf',
   'config'
-], function ($, config) {
+],function($, csrf, config) {
   return function initPersona() {
     var $login = $('button.login'),
       $logout = $('button.logout'),
@@ -49,7 +50,8 @@ define([
           },
           success: function (res) {
             if (res && res.status === 'okay') {
-              // csrf.set(res.data.csrf);
+              console.log( res.data );
+              csrf.set(res.data.csrf);
               // Eventually we'll need to figure out if
               // the logged in user owns the page so that they can edit.
               if (false) {
@@ -73,7 +75,7 @@ define([
         $.ajax(config.serviceURL + '/persona/logout', {
           type: 'POST',
           success: function () {
-            // csrf.set('');
+            csrf.set('');
             uiState.loggedOut();
           },
           error: function (jqxhr, txtStatus, err) {

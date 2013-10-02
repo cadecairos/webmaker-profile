@@ -3,6 +3,7 @@ define([
   'lodash',
   'uuid',
   'komponent',
+  'csrf',
   'config',
   'jquery-debounce'
 ], function (
@@ -10,6 +11,7 @@ define([
   _,
   uuid,
   Komponent,
+  csrf,
   config
 ) {
 
@@ -50,15 +52,18 @@ define([
      * @return {undefined}
      */
     _save: $.debounce(1000, function () {
+      window.console.log( 'WAT ', csrf.get() );
       $.ajax({
         xhrFields: {
           withCredentials: true
         },
         url: config.serviceURL + '/user-data/' + this.username,
+        headers: {
+          'x-csrf-token': csrf.get()
+        },
         type: 'POST',
         dataType: 'json',
         contentType: 'application/json',
-        crossDomain: true,
         data: JSON.stringify(storage)
       })
         .done(function () {
